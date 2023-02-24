@@ -14,6 +14,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatChipsModule} from '@angular/material/chips';
+import { UserModule } from './modules/user/user.module';
+import { CarModule } from './modules/car/car.module';
+
 
 @NgModule({
   declarations: [
@@ -32,8 +35,9 @@ import {MatChipsModule} from '@angular/material/chips';
     MatDatepickerModule,
     MatButtonToggleModule,
     MatDividerModule,
-    MatChipsModule
-
+    MatChipsModule,
+    UserModule,
+    CarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

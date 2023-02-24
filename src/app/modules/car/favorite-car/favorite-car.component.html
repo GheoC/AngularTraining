@@ -1,0 +1,11 @@
+<h2>Favorite Car Component</h2>
+<div>
+    <input class="input" type="text" [value]="favoriteCar" (keyup)="changeFavoriteCar($event)"/>
+</div>
+
+<div>
+    <input class="input" type="text" [(ngModel)]="favoriteCar"/>
+</div>
+
+<p class="input">{{favoriteCar}}</p>
+
