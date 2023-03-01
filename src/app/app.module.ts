@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PageOneComponent } from './components/page-one/page-one.component';
-import { PageTwoComponent } from './components/page-two/page-two.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
@@ -16,13 +14,12 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatChipsModule} from '@angular/material/chips';
 import { UserModule } from './modules/user/user.module';
 import { CarModule } from './modules/car/car.module';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PageOneComponent,
-    PageTwoComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +33,7 @@ import { CarModule } from './modules/car/car.module';
     MatButtonToggleModule,
     MatDividerModule,
     MatChipsModule,
+    MatButtonModule,
     UserModule,
     CarModule
   ],

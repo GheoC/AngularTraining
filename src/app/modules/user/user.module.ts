@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ViewUsersComponent } from './view-users/view-users.component';
-import {MatCardModule} from '@angular/material/card';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatButtonModule} from '@angular/material/button';
-
+import { UsersComponent } from './components/users/users.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { UserTitleComponent } from './components/user-title/user-title.component';
 
 
 @NgModule({
   declarations: [
-    ViewUsersComponent,
+    UsersComponent,
+    UserCardComponent,
+    UserTitleComponent,
   ],
   imports: [
     CommonModule,
@@ -18,7 +21,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatButtonModule
   ],
   exports:[
-    ViewUsersComponent
+    UsersComponent
   ]
 })
 export class UserModule { }

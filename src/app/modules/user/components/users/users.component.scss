@@ -13,10 +13,13 @@
 }
 
 .container{
-    margin-left: 300px;
-    margin-right: 300px;
+    margin-top: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding: 20px;
     display: flex;
-    justify-content: space-evenly;
+    flex-wrap: wrap;
+    justify-content: space;
     align-items: center;
     max-width: auto;
     height: auto;
@@ -25,4 +28,8 @@
 
 .hidden{
     display: none;
+}
+
+.example-button-row .mat-mdc-button-base {
+    margin: 8px 16px 8px 0;
 }

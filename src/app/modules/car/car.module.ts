@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FavoriteCarComponent } from './favorite-car/favorite-car.component';
+import { FavoriteCarComponent } from './components/favorite-car/favorite-car.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
