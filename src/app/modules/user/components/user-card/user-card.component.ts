@@ -9,12 +9,11 @@ import { User } from '../../models/User';
 export class UserCardComponent {
 
   @Input() user!: User;
-  @Input() showInactive!: boolean
-  @Output() selectedUser = new EventEmitter<User>
+  @Output() deactivate = new EventEmitter<void> 
 
-  toggleUserStatus(user: User) {
-    if (!(user.isActivated === false || user.age < 18)) {
-      this.selectedUser.emit(user);
+  toggleUserStatus() {
+    if (!(!this.user.isActivated || this.user.age < 18)) {
+      this.deactivate.emit();
     }
   }
 }

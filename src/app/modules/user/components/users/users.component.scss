@@ -1,3 +1,4 @@
+@import "../../../../app.component.scss";
 .user-inactive{
     color: red;
 }
@@ -28,8 +29,4 @@
 
 .hidden{
     display: none;
-}
-
-.example-button-row .mat-mdc-button-base {
-    margin: 8px 16px 8px 0;
 }

@@ -28,21 +28,22 @@ export class UsersComponent implements OnInit {
   }
 
   toggleUserStatus(user: User) {
-    this.userTitle?.changeTitle(`User ${user.name} was deactivated`)
+    this.userTitle!.lastUserDeactivated = user.name;
+    this.userTitle?.changeTitle(`User ${user.name} was deactivated`);
     user.isActivated = !user.isActivated;
   }
 
   deactivateAll() {
     this.users.map(u => {
       if (u.age > 18) {
-        u.isActivated = false
+        u.isActivated = false;
       }
-      return u
+      return u;
     })
   }
 
   deactivateAllFromChildToggleMethod() {
-    this.userCardComponents?.map(uc => uc.toggleUserStatus(uc.user))
-    this.userTitle?.changeTitle("Every user with age above 18 was deactivated!")
+    this.userCardComponents?.forEach(uc => uc.toggleUserStatus());
+    this.userTitle?.changeTitle("Every user with age above 18 was deactivated!");
   }
 }

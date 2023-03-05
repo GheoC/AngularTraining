@@ -11,10 +11,8 @@
 
 
 <div class="container">
-    <!-- <div class="cards-container"> -->
-    <div *ngFor="let user of users">
-        <app-user-card [user]="user" [showInactive]="showInactive"
-            (selectedUser)="toggleUserStatus($event)"></app-user-card>
-    </div>
-    <!-- </div> -->
+    <ng-container *ngFor="let user of users">
+        <app-user-card *ngIf="user.isActivated || showInactive" [user]="user"
+            (deactivate)="toggleUserStatus(user)"></app-user-card>
+    </ng-container>
 </div>

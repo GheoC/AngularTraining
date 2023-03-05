@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class UserTitleComponent {
 
-  lastUserDeactivated: string = 'No changes made yet'
+  lastUserDeactivated: string = 'No changes made yet';
 
   changeTitle(message: string) {
     this.lastUserDeactivated = message;
