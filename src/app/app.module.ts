@@ -14,8 +14,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatChipsModule} from '@angular/material/chips';
 import { UserModule } from './modules/user/user.module';
 import { CarModule } from './modules/car/car.module';
-import {MatButtonModule} from '@angular/material/button';
-
+import {MatButtonModule} from '@angular/material/button'
 
 @NgModule({
   declarations: [
@@ -35,7 +34,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatChipsModule,
     MatButtonModule,
     UserModule,
-    CarModule
+    CarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

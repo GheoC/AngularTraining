@@ -1,0 +1,1 @@
+export type TGenre = 'female' | 'male';

@@ -10,10 +10,4 @@ export class UserCardComponent {
 
   @Input() user!: User;
   @Output() deactivate = new EventEmitter<void> 
-
-  toggleUserStatus() {
-    if (!(!this.user.isActivated || this.user.age < 18)) {
-      this.deactivate.emit();
-    }
-  }
 }

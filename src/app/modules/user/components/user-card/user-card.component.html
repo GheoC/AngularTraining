@@ -4,20 +4,6 @@
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{user.name}}</mat-card-title>
         <mat-card-subtitle>age: {{user.age}}</mat-card-subtitle>
-        <mat-card-subtitle [ngSwitch]="user.isActivated">
-            <p *ngSwitchCase="true" style="color: #2cf036;">Active</p>
-            <p *ngSwitchCase="false" style="color: red;">Non-Active</p>
-        </mat-card-subtitle>
     </mat-card-header>
-
-    <mat-card-content style="align-self: center;">
-        <p [ngClass]="user.isActivated === true ? 'user-active' : 'user-inactive'">
-            This is for [ngClass] demo: {{user.name}}
-        </p>
-        <p [ngStyle]="user.isActivated === true ? {'color':'#2cf036', 'font-weight': 'bold'} : {'color':'red'}">
-            This is for [ngStyle] demo: {{user.name}}
-        </p>
-    </mat-card-content>
-
-    <button [disabled]="!user.isActivated || user.age<18" mat-raised-button (click)="toggleUserStatus()">Deactivate User!</button>
+    <img mat-card-image class="imgs" src={{user.imageUrl}} alt="`Photo of a ${{user.name}}`">
 </mat-card>
