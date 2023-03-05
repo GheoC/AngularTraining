@@ -1,4 +1,5 @@
 import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { ShareService } from 'src/app/modules/shared/services/share.service';
 import { User } from '../../models/User';
 import { UsersService } from '../../services/users.service';
 import { UserCardComponent } from '../user-card/user-card.component';
@@ -10,40 +11,42 @@ import { UserTitleComponent } from '../user-title/user-title.component';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-
-  showInactive: boolean = true
+  
   users: User[] = []
+  favorites: User[] = []
 
-  @ViewChild(UserTitleComponent, { static: true }) userTitle?: UserTitleComponent;  
+  @ViewChild(UserTitleComponent, { static: true }) userTitle?: UserTitleComponent;
   @ViewChildren(UserCardComponent) userCardComponents?: QueryList<UserCardComponent>
 
-  constructor(private userService: UsersService) { }
+  constructor(private userService: UsersService, private sharedService: ShareService) { }
 
   ngOnInit(): void {
     this.users = this.userService.getUsers();
+    this.favorites = this.sharedService.getFavoriteUsers();
   }
 
-  toggleShowInactive() {
-    this.showInactive = !this.showInactive;
+  toggleUserInFavorites(user: User) {
+    console.log(user);
+    debugger;
+    if (this.isUserInFavorites(user)) {
+      this.removeUserFromFavorites(user)
+    } else {
+      this.addUserToFavorites(user)
+    }
+    console.log(this.favorites)
   }
 
-  toggleUserStatus(user: User) {
-    this.userTitle!.lastUserDeactivated = user.name;
-    this.userTitle?.changeTitle(`User ${user.name} was deactivated`);
-    user.isActivated = !user.isActivated;
+  addUserToFavorites(user: User) {
+    debugger
+    this.favorites = [...this.favorites, user]
   }
 
-  deactivateAll() {
-    this.users.map(u => {
-      if (u.age > 18) {
-        u.isActivated = false;
-      }
-      return u;
-    })
+  removeUserFromFavorites(user: User) {
+    debugger
+    this.favorites = this.favorites.filter(favorite => favorite !== user)
   }
 
-  deactivateAllFromChildToggleMethod() {
-    this.userCardComponents?.forEach(uc => uc.toggleUserStatus());
-    this.userTitle?.changeTitle("Every user with age above 18 was deactivated!");
+  isUserInFavorites(user: User): boolean {
+    return this.favorites.some(u => u.id === user.id);
   }
 }

@@ -1,18 +1,1 @@
-<h2>View Users Component</h2>
-
-<div class="container">
-    <div class="example-button-row">
-        <button mat-raised-button color="primary" (click)="toggleShowInactive()">Toggle Display</button>
-        <button mat-raised-button color="warn" (click)="deactivateAllFromChildToggleMethod()">Deactivate all</button>
-    </div>
-</div>
-
-<app-user-title class="container"></app-user-title>
-
-
-<div class="container">
-    <ng-container *ngFor="let user of users">
-        <app-user-card *ngIf="user.isActivated || showInactive" [user]="user"
-            (deactivate)="toggleUserStatus(user)"></app-user-card>
-    </ng-container>
-</div>
+<app-users-list-view [users]="users" [favorites]="favorites" (favorite)="toggleUserInFavorites($event)">

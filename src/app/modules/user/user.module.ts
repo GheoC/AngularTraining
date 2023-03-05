@@ -6,6 +6,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { UserTitleComponent } from './components/user-title/user-title.component';
+import { SharedModule } from '../shared/shared.module';
+import { UsersListViewComponent } from './components/users-list-view/users-list-view.component';
 
 
 @NgModule({
@@ -13,12 +15,14 @@ import { UserTitleComponent } from './components/user-title/user-title.component
     UsersComponent,
     UserCardComponent,
     UserTitleComponent,
+    UsersListViewComponent,
   ],
   imports: [
     CommonModule,
     MatCardModule,
     MatDividerModule,
-    MatButtonModule
+    MatButtonModule,
+    SharedModule
   ],
   exports:[
     UsersComponent
