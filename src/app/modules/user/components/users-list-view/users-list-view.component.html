@@ -1,20 +1,41 @@
 <div class="container">
-    <div class="container" style="width: 1100px;">
+    <div class="cards-container">
         <ng-container *ngFor="let user of users">
-            <app-shared-card title={{user.name}} subtitle={{user.age}} imageUrl={{user.imageUrl}}
-                [details]="[user.gender, user.department, user.company]" (favorite)="addFavorite(user)">
+            <app-shared-card
+                imageUrl={{user.imageUrl}}
+                (favorite)="toggleUserInFavorite(user)"
+                isFavorite={{isUserInFavorites(user.id)}}
+            >
+                    <div title>
+                      <p [ngClass]="'user-title'">Username {{user.name}}</p>
+                      <p>Age {{user.age}}</p>
+                    </div>
+
+                    <div content>
+                      <p>{{user.company}}</p>
+                      <p>{{user.department}}</p>
+                      <p>{{user.gender}}</p>
+                    </div>
             </app-shared-card>
         </ng-container>
     </div>
 
-    <div class="container" style="width: 1100px;">
+    <div class="cards-container">
         <ng-container *ngFor="let user of favorites">
-            <app-shared-card 
-                title={{user.name}} 
-                subtitle={{user.age}} 
+            <app-shared-card
                 imageUrl={{user.imageUrl}}
-                [buttonDisabled]="true"
-                [details]="[user.gender, user.department, user.company]">
+                [isButtonDisabled]="true"
+            >
+                      <div title>
+                        <p [ngClass]="'user-title'">Username {{user.name}}</p>
+                        <p>Age {{user.age}}</p>
+                      </div>
+
+                      <div content>
+                        <p>{{user.company}}</p>
+                        <p>{{user.department}}</p>
+                        <p>{{user.gender}}</p>
+                      </div>
             </app-shared-card>
         </ng-container>
     </div>

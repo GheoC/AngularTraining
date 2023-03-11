@@ -1,9 +1,10 @@
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { ShareService } from 'src/app/modules/shared/services/share.service';
-import { User } from '../../models/User';
-import { UsersService } from '../../services/users.service';
-import { UserCardComponent } from '../user-card/user-card.component';
-import { UserTitleComponent } from '../user-title/user-title.component';
+import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {FavoriteService} from 'src/app/modules/shared/services/favorite.service';
+import {User} from '../../models/User';
+import {UsersService} from '../../services/users.service';
+import {UserCardComponent} from '../user-card/user-card.component';
+import {UserTitleComponent} from '../user-title/user-title.component';
+import {EntityType} from "../../../shared/enums/EntityType";
 
 @Component({
   selector: 'app-users',
@@ -11,42 +12,44 @@ import { UserTitleComponent } from '../user-title/user-title.component';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  
-  users: User[] = []
-  favorites: User[] = []
 
-  @ViewChild(UserTitleComponent, { static: true }) userTitle?: UserTitleComponent;
+  users: User[] = [];
+  favorites: User[] = [];
+  favoriteIds: number[] = [];
+
+  @ViewChild(UserTitleComponent, {static: true}) userTitle?: UserTitleComponent;
   @ViewChildren(UserCardComponent) userCardComponents?: QueryList<UserCardComponent>
 
-  constructor(private userService: UsersService, private sharedService: ShareService) { }
+  constructor(private userService: UsersService, private favoriteService: FavoriteService) {
+  }
 
   ngOnInit(): void {
     this.users = this.userService.getUsers();
-    this.favorites = this.sharedService.getFavoriteUsers();
+    this.favoriteIds = this.favoriteService.getFavoriteIdsByType(EntityType.User);
+    this.populateFavorites();
   }
 
   toggleUserInFavorites(user: User) {
-    console.log(user);
-    debugger;
-    if (this.isUserInFavorites(user)) {
-      this.removeUserFromFavorites(user)
-    } else {
-      this.addUserToFavorites(user)
+    if (user.id != null) {
+      this.favoriteService.toggleIdInFavoritesStore(EntityType.User, user.id);
     }
-    console.log(this.favorites)
+    this.populateFavorites();
   }
 
-  addUserToFavorites(user: User) {
-    debugger
-    this.favorites = [...this.favorites, user]
+  populateFavorites(): void {
+    let newFavorites: User[] = [];
+    this.favoriteIds.forEach(id => {
+      let foundUser = this.findUserById(id);
+      if (foundUser !== undefined) {
+        newFavorites.push(foundUser);
+      }
+    })
+    this.favorites = [...newFavorites];
   }
 
-  removeUserFromFavorites(user: User) {
-    debugger
-    this.favorites = this.favorites.filter(favorite => favorite !== user)
-  }
-
-  isUserInFavorites(user: User): boolean {
-    return this.favorites.some(u => u.id === user.id);
+  findUserById(id: number): User | undefined {
+    return this.users.find(u => {
+      return u.id === id;
+    });
   }
 }
