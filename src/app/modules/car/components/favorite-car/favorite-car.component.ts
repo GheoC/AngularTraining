@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-favorite-car',
@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class FavoriteCarComponent {
 
-  favoriteCar: String = "Audi";
+  favoriteCar: string = "Audi";
 
   changeFavoriteCar(event: Event) {
     this.favoriteCar = (event.target as HTMLInputElement).value;

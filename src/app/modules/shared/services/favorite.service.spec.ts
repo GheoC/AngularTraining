@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ShareService } from './share.service';
+import { FavoriteService } from './favorite.service';
 
 describe('ShareService', () => {
-  let service: ShareService;
+  let service: FavoriteService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ShareService);
+    service = TestBed.inject(FavoriteService);
   });
 
   it('should be created', () => {

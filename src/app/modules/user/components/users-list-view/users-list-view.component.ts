@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { User } from '../../models/User';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {User} from '../../models/User';
+import {FavoriteService} from "../../../shared/services/favorite.service";
+import {EntityType} from "../../../shared/enums/EntityType";
 
 @Component({
   selector: 'app-users-list-view',
@@ -10,10 +12,15 @@ export class UsersListViewComponent {
 
   @Input() users: User[] = [];
   @Input() favorites: User[] = [];
-  @Output() favorite = new EventEmitter<User>
+  @Output() favorite = new EventEmitter<User>();
 
-  addFavorite(user: User){
-    console.log(user);
+  constructor(private favoriteService: FavoriteService){}
+
+  toggleUserInFavorite(user: User){
     this.favorite.emit(user);
+  }
+
+  isUserInFavorites(id: number): boolean {
+    return this.favoriteService.isEntityInFavorites(id, EntityType.User);
   }
 }

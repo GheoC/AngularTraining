@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Car } from '../../models/Car';
-import { CarsService } from '../../services/cars.service';
+import {EntityType} from "../../../shared/enums/EntityType";
+import {FavoriteService} from "../../../shared/services/favorite.service";
 
 @Component({
   selector: 'app-cars-list-view',
@@ -11,9 +12,15 @@ export class CarsListViewComponent {
 
   @Input() cars: Car[] = [];
   @Input() favorites: Car[] = [];
-  @Output() favorite = new EventEmitter<Car>;
+  @Output() favorite = new EventEmitter<Car>();
 
-  addFavorite(car: Car) {
+  constructor(private favoriteService: FavoriteService) {}
+
+  toggleFavorite(car: Car) {
     this.favorite.emit(car);
+  }
+
+  isUserInFavorites(id: number): boolean {
+    return this.favoriteService.isEntityInFavorites(id, EntityType.Car);
   }
 }

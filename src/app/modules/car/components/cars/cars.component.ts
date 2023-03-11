@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ShareService } from 'src/app/modules/shared/services/share.service';
-import { Car } from '../../models/Car';
-import { CarsService } from '../../services/cars.service';
+import {Component, OnInit} from '@angular/core';
+import {FavoriteService} from 'src/app/modules/shared/services/favorite.service';
+import {Car} from '../../models/Car';
+import {CarsService} from '../../services/cars.service';
+import {EntityType} from "../../../shared/enums/EntityType";
 
 @Component({
   selector: 'app-cars',
@@ -10,36 +11,39 @@ import { CarsService } from '../../services/cars.service';
 })
 export class CarsComponent implements OnInit {
 
-  constructor(private carsService: CarsService, private sharedService: ShareService) { }
+  constructor(private carsService: CarsService, private favoriteService: FavoriteService) {}
 
   cars: Car[] = [];
   favorites: Car[] = [];
+  favoriteIds: number[] = [];
 
   ngOnInit(): void {
     this.cars = this.carsService.getCars();
-    this.favorites = this.sharedService.getFavoriteCars();
+    this.favoriteIds = this.favoriteService.getFavoriteIdsByType(EntityType.Car);
+    this.populateFavorites();
   }
 
-  toggleUserInFavorites(car: Car) {
-    debugger;
-    console.log(car);
-    if (this.isCarInFavorites(car)) {
-      this.removeCarFromFavorites(car);
-    } else {
-      this.addCarToFavorites(car);
+  toggleUserInFavorites(car: Car):void {
+    if (car.id != null) {
+      this.favoriteService.toggleIdInFavoritesStore(EntityType.Car, car.id);
     }
+    this.populateFavorites();
   }
 
-  addCarToFavorites(car: Car) {
-    this.favorites = [...this.favorites, car];
+  populateFavorites(): void {
+    let newFavorites: Car[] = [];
+    this.favoriteIds.forEach(id => {
+      let foundCar = this.findUserById(id);
+      if (foundCar !== undefined) {
+        newFavorites.push(foundCar);
+      }
+    })
+    this.favorites = [...newFavorites];
   }
 
-  removeCarFromFavorites(car: Car) {
-    this.favorites = this.favorites.filter(favorite => favorite !== car);
-  }
-
-  isCarInFavorites(car: Car): boolean {
-    debugger;
-    return this.favorites.some(c => c.id === car.id);
+  findUserById(id: number): Car | undefined {
+    return this.cars.find(car => {
+      return car.id === id;
+    });
   }
 }
