@@ -4,10 +4,10 @@
             <app-shared-card
                 imageUrl={{user.imageUrl}}
                 (favorite)="toggleUserInFavorite(user)"
-                isFavorite={{isUserInFavorites(user.id)}}
+                isFavorite={{isUserInFavorites(user.id!)}}
             >
                     <div title>
-                      <p [ngClass]="'user-title'">Username {{user.name}}</p>
+                      <p [ngClass]="'user-title'">Username {{user.firstName}} {{user.lastName}}</p>
                       <p>Age {{user.age}}</p>
                     </div>
 
@@ -27,7 +27,7 @@
                 [isButtonDisabled]="true"
             >
                       <div title>
-                        <p [ngClass]="'user-title'">Username {{user.name}}</p>
+                        <p [ngClass]="'user-title'">Username {{user.firstName}} {{user.lastName}}</p>
                         <p>Age {{user.age}}</p>
                       </div>
 

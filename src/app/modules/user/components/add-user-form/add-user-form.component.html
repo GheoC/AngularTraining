@@ -1,0 +1,88 @@
+<div class="container">
+  <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+    <div class="field">
+      <label class="label">First Name</label>
+      <input type="text"
+             class="input"
+             formControlName="firstName"
+             [class.invalid]="isFieldInvalid('firstName')"
+      />
+      <span *ngIf="isFieldInvalid('firstName')" class="error" style="font-size: 12px">First name must be at least 3 characters long!</span>
+    </div>
+
+    <div class="field">
+      <label class="label">Last Name</label>
+      <input type="text"
+             class="input"
+             formControlName="lastName"
+             [class.invalid]="isFieldInvalid('lastName')"
+      />
+      <span *ngIf="isFieldInvalid('lastName')" class="error" style="font-size: 12px">Last name must be at least 3 characters long!</span>
+    </div>
+
+    <div class="field">
+      <label class="label">Email</label>
+      <input type="email"
+             class="input"
+             formControlName="email"
+             [class.invalid]="isFieldInvalid('email')"
+      />
+      <span *ngIf="isFieldInvalid('email')" class="error" style="font-size: 12px">This must be a valid email</span>
+    </div>
+
+    <div class="field">
+      <label class="label">Age</label>
+      <input type="number"
+             class="input"
+             formControlName="age"
+             [class.invalid]="isFieldInvalid('age')"
+      />
+      <span *ngIf="isFieldInvalid('age')" class="error" style="font-size: 12px">Age must be at least 18 years old to register</span>
+    </div>
+
+    <div class="field">
+      <label class="label">Company</label>
+      <input type="text"
+             class="input"
+             formControlName="company"
+             [class.invalid]="isFieldInvalid('company')"
+      />
+      <span *ngIf="isFieldInvalid('company')" class="error" style="font-size: 12px">Company name must be at least 3 characters long!</span>
+    </div>
+
+    <div class="field">
+      <label class="label">Department</label>
+      <input type="text"
+             class="input"
+             formControlName="department"
+             [class.invalid]="isFieldInvalid('department')"
+      />
+      <span *ngIf="isFieldInvalid('company')" class="error" style="font-size: 12px">Department name must be at least 2 characters long!</span>
+    </div>
+
+    <div class="field">
+      <label class="label">Profile Picture URL</label>
+      <input type="text"
+             class="input"
+             formControlName="imageUrl"
+             [class.invalid]="isFieldInvalid('imageUrl')"
+      />
+    </div>
+
+    <div class="field">
+      <label class="label">Gender</label>
+      <div>
+        <input type="radio" id="male" name="gender" value="male" formControlName="gender">
+        <label for="male">Male</label>
+      </div>
+      <div>
+        <input type="radio" id="female" name="gender" value="female" formControlName="gender">
+        <label for="female">Female</label>
+      </div>
+    </div>
+    <div>
+      <button type="submit" mat-raised-button class="button">Register</button>
+    </div>
+  </form>
+</div>

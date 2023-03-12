@@ -8,6 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { UserTitleComponent } from './components/user-title/user-title.component';
 import { SharedModule } from '../shared/shared.module';
 import { UsersListViewComponent } from './components/users-list-view/users-list-view.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import { AddUserFormComponent } from './components/add-user-form/add-user-form.component';
 
 
 @NgModule({
@@ -16,16 +19,20 @@ import { UsersListViewComponent } from './components/users-list-view/users-list-
     UserCardComponent,
     UserTitleComponent,
     UsersListViewComponent,
+    AddUserComponent,
+    AddUserFormComponent,
   ],
   imports: [
     CommonModule,
     MatCardModule,
     MatDividerModule,
     MatButtonModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule,
   ],
   exports:[
-    UsersComponent
+    UsersComponent,
+    AddUserComponent,
   ]
 })
 export class UserModule { }
