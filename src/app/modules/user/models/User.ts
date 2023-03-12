@@ -1,10 +1,12 @@
-import { TGenre } from "./TGenre";
+import { TGender } from "./TGender";
 
 export interface User {
-    id: number;
-    name: string;
+    id?: number;
+    firstName: string;
+    lastName: string;
+    email: string;
     age: number;
-    gender: TGenre;
+    gender: TGender;
     department: string;
     company: string;
     imageUrl: string;

@@ -1,7 +1,9 @@
 [
     {
       "id": 1,
-      "name": "John Smith",
+      "firstName": "John",
+      "lastName": "Smith",
+      "email": "john@gmail.com",
       "age": 17,
       "gender": "male",
       "department": "Accounting",
@@ -10,7 +12,9 @@
     },
     {
       "id": 2,
-      "name": "Will Smith",
+      "firstName": "Will",
+      "lastName": "Smith",
+      "email": "will@gmail.com",
       "age": 33,
       "gender": "male",
       "department": "IT",
@@ -19,7 +23,9 @@
     },
     {
       "id": 3,
-      "name": "Maria Smith",
+      "firstName": "Maria",
+      "lastName": "Smith",
+      "email": "maria@gmail.com",
       "age": 24,
       "gender": "female",
       "department": "Human Resources",
@@ -28,7 +34,9 @@
     },
     {
       "id": 4,
-      "name": "Mike Smith",
+      "firstName": "Mike",
+      "lastName": "Smith",
+      "email": "mike@gmail.com",
       "age": 40,
       "gender": "male",
       "department": "Accounting",
@@ -37,7 +45,9 @@
     },
     {
       "id": 5,
-      "name": "Sam Smith",
+      "firstName": "Sam",
+      "lastName": "Smith",
+      "email": "sam@gmail.com",
       "age": 21,
       "gender": "male",
       "department": "IT",
@@ -46,7 +56,9 @@
     },
     {
       "id": 6,
-      "name": "Barbara Smith",
+      "firstName": "Barbara",
+      "lastName":"Smith",
+      "email": "barbara@gmail.com",
       "age": 30,
       "gender": "female",
       "department": "Public Relations",
@@ -55,7 +67,9 @@
     },
     {
       "id": 7,
-      "name": "Mike Smith",
+      "firstName": "Joe",
+      "lastName":"Smith",
+      "email": "jow@gmail.com",
       "age": 31,
       "gender": "male",
       "department": "IT",
@@ -64,7 +78,9 @@
     },
     {
       "id": 8,
-      "name": "Jim Smith",
+      "firstName": "Jim",
+      "lastName": "Smith",
+      "email": "jim@gmail.com",
       "age": 37,
       "gender": "male",
       "department": "IT",
@@ -73,7 +89,9 @@
     },
     {
       "id": 9,
-      "name": "Jane Smith",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "email": "jane@gmail.com",
       "age": 41,
       "gender": "female",
       "department": "Human Resources",
