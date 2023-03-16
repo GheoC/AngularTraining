@@ -1,42 +1,11 @@
-<div class="container">
-    <div class="cards-container">
-        <ng-container *ngFor="let user of users">
-            <app-shared-card
-                imageUrl={{user.imageUrl}}
-                (favorite)="toggleUserInFavorite(user)"
-                isFavorite={{isUserInFavorites(user.id!)}}
-            >
-                    <div title>
-                      <p [ngClass]="'user-title'">Username {{user.firstName}} {{user.lastName}}</p>
-                      <p>Age {{user.age}}</p>
-                    </div>
-
-                    <div content>
-                      <p>{{user.company}}</p>
-                      <p>{{user.department}}</p>
-                      <p>{{user.gender}}</p>
-                    </div>
-            </app-shared-card>
-        </ng-container>
-    </div>
-
-    <div class="cards-container">
-        <ng-container *ngFor="let user of favorites">
-            <app-shared-card
-                imageUrl={{user.imageUrl}}
-                [isButtonDisabled]="true"
-            >
-                      <div title>
-                        <p [ngClass]="'user-title'">Username {{user.firstName}} {{user.lastName}}</p>
-                        <p>Age {{user.age}}</p>
-                      </div>
-
-                      <div content>
-                        <p>{{user.company}}</p>
-                        <p>{{user.department}}</p>
-                        <p>{{user.gender}}</p>
-                      </div>
-            </app-shared-card>
-        </ng-container>
-    </div>
+<div class="cards-container">
+  <ng-container *ngFor="let user of users">
+    <app-user-card
+      [user]="user"
+      [isFavorite]="isUserInFavorites(user.id!)"
+      [isButtonDisabled]="isButtonDisabled"
+      (favoriteToggle)="toggleUserInFavorite(user)"
+    >
+    </app-user-card>
+  </ng-container>
 </div>

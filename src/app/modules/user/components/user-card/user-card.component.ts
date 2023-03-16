@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { User } from '../../models/User';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {User} from "../../models/User";
 
 @Component({
   selector: 'app-user-card',
@@ -9,5 +9,11 @@ import { User } from '../../models/User';
 export class UserCardComponent {
 
   @Input() user!: User;
-  @Output() deactivate = new EventEmitter<void> 
+  @Input() isFavorite!: boolean;
+  @Input() isButtonDisabled: boolean = false;
+  @Output() favoriteToggle = new EventEmitter<User>();
+
+  toggleUserInFavorite(user: User) {
+    this.favoriteToggle.emit(user);
+  }
 }

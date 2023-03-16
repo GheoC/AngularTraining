@@ -18,7 +18,7 @@ export class AddUserFormComponent {
     age: [null, [Validators.required, Validators.min(18), Validators.max(110)]],
     company: ['', [Validators.required, Validators.minLength(3)]],
     department: ['', [Validators.required, Validators.minLength(2)]],
-    imageUrl: ['', [Validators.required]],
+    imageUrl: ['https://static.toiimg.com/thumb/resizemode-4,msid-76729750,imgsize-249247,width-720/76729750.jpg'],
     gender: ['male' as TGender, [Validators.required]],
   });
   isSubmitted: boolean = false;

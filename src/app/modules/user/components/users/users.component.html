@@ -1,5 +1,13 @@
-<app-users-list-view
-  [users]="users"
-  [favorites]="favorites"
-  (favorite)="toggleUserInFavorites($event)">
-</app-users-list-view>
+<div class="container">
+  <app-users-list-view
+    [users]="users"
+    [favoriteIDs]="favoriteIds"
+    (favorite)="toggleUserInFavorites($event)">
+  </app-users-list-view>
+
+  <app-users-list-view
+    [users]="favorites"
+    [isButtonDisabled]="true"
+    (favorite)="toggleUserInFavorites($event)">
+  </app-users-list-view>
+</div>

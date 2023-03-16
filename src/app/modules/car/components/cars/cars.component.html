@@ -1,1 +1,13 @@
-<app-cars-list-view [cars]="cars" [favorites]="favorites" (favorite)="toggleUserInFavorites($event)"></app-cars-list-view>
+<div class="container">
+  <app-cars-list-view
+    [cars]="cars"
+    [favoriteIDs] = "favoriteIds"
+    (favorite)="toggleCarInFavorites($event)">
+  </app-cars-list-view>
+
+  <app-cars-list-view
+    [cars]="favorites"
+    [isButtonDisabled]="true"
+    (favorite)="toggleCarInFavorites($event)">
+  </app-cars-list-view>
+</div>

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersComponent } from './components/users/users.component';
-import { UserCardComponent } from './components/user-card/user-card.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,16 +10,17 @@ import { UsersListViewComponent } from './components/users-list-view/users-list-
 import { AddUserComponent } from './components/add-user/add-user.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { AddUserFormComponent } from './components/add-user-form/add-user-form.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
 
 
 @NgModule({
   declarations: [
     UsersComponent,
-    UserCardComponent,
     UserTitleComponent,
     UsersListViewComponent,
     AddUserComponent,
     AddUserFormComponent,
+    UserCardComponent,
   ],
   imports: [
     CommonModule,

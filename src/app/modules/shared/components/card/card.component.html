@@ -11,7 +11,7 @@
     </mat-card-content>
 
     <mat-card-actions>
-        <button mat-icon-button *ngIf="!isButtonDisabled" [ngStyle]="{'color': isFavorite === 'true' ? 'red': 'grey'}" (click)="toggleFavorite()">
+        <button mat-icon-button [disabled]="isButtonDisabled" [ngStyle]="{'color': isFavorite ? 'red': 'grey'}" (click)="toggleFavorite()">
             <mat-icon>favorite</mat-icon>
         </button>
     </mat-card-actions>
