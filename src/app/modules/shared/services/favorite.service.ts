@@ -18,9 +18,10 @@ export class FavoriteService {
     return this.favoritesStore[type];
   }
 
-  toggleIdInFavoritesStore(type: EntityType, id: number): void {
-    if (this.favoritesStore[type].includes(id)){
-      this.favoritesStore[type].splice(this.favoritesStore[type].indexOf(id), 1);
+  toggleFavoriteId(type: EntityType, id: number): void {
+    const index = this.favoritesStore[type].indexOf(id);
+    if (index !== -1){
+      this.favoritesStore[type].splice(index, 1);
     } else {
       this.favoritesStore[type].push(id);
     }

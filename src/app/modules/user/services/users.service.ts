@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/User';
 import data from './users.json'
+import {TGender} from "../models/TGender";
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +20,18 @@ export class UsersService {
     return this.users.length + 1;
   }
 
-  addUser(user: User): void {
-    user.id = this.getNextId();
-    user.imageUrl = "https://static.toiimg.com/thumb/resizemode-4,msid-76729750,imgsize-249247,width-720/76729750.jpg";
-    this.users.push(user);
-    console.log(this.users);
+  addUser(formUser: User): void {
+    let newUser: User = {
+        firstName: formUser.firstName,
+        lastName: formUser.lastName,
+        email: formUser.email!,
+        age: formUser.age!,
+        company: formUser.company!,
+        department: formUser.department!,
+        gender: formUser.gender! as TGender,
+        imageUrl: formUser.imageUrl!
+      }
+    newUser.id = this.getNextId();
+    this.users.push(newUser);
   }
 }

@@ -1,38 +1,11 @@
-<div class="container">
-    <div class="cards-container">
-        <ng-container *ngFor="let car of cars">
-            <app-shared-card
-              imageUrl={{car.imageUrl}}
-              (favorite)="toggleFavorite(car)"
-              isFavorite={{isUserInFavorites(car.id)}}
-            >
-                  <div title>
-                    <p [ngClass]="'car-title'">Username {{car.name}}</p>
-                    <p>Release Year {{car.releaseYear}}</p>
-                  </div>
-                  <div content>
-                    <p>{{car.number}}</p>
-                    <p>{{car.color}}</p>
-                  </div>
-            </app-shared-card>
-        </ng-container>
-    </div>
-
-    <div class="cards-container">
-        <div *ngFor="let car of favorites">
-            <app-shared-card
-                imageUrl={{car.imageUrl}}
-                [isButtonDisabled]="true"
-            >
-                    <div title>
-                      <p [ngClass]="'car-title'">Username {{car.name}}</p>
-                      <p>Release Year {{car.releaseYear}}</p>
-                    </div>
-                    <div content>
-                      <p>{{car.number}}</p>
-                      <p>{{car.color}}</p>
-                    </div>
-            </app-shared-card>
-        </div>
-    </div>
+<div class="cards-container">
+  <ng-container *ngFor="let car of cars">
+    <app-car-card
+      [car]="car"
+      [isFavorite]="isCarInFavorites(car.id)"
+      [isButtonDisabled]="isButtonDisabled"
+      (favoriteToggle)="toggleFavorite(car)"
+    >
+    </app-car-card>
+  </ng-container>
 </div>

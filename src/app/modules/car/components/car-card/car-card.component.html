@@ -1,0 +1,15 @@
+<app-card
+  [imageUrl]="car.imageUrl"
+  [isFavorite]="isFavorite"
+  [isButtonDisabled]="isButtonDisabled"
+  (favoriteToggle)="toggleCarInFavorite(car)"
+>
+  <div title>
+    <p [ngClass]="'car-title'">Username {{car.name}}</p>
+    <p>Release Year {{car.releaseYear}}</p>
+  </div>
+  <div content>
+    <p>{{car.number}}</p>
+    <p>{{car.color}}</p>
+  </div>
+</app-card>

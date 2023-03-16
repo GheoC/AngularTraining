@@ -1,7 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {User} from '../../models/User';
-import {FavoriteService} from "../../../shared/services/favorite.service";
-import {EntityType} from "../../../shared/enums/EntityType";
 
 @Component({
   selector: 'app-users-list-view',
@@ -11,16 +9,15 @@ import {EntityType} from "../../../shared/enums/EntityType";
 export class UsersListViewComponent {
 
   @Input() users: User[] = [];
-  @Input() favorites: User[] = [];
+  @Input() favoriteIDs: number[] = []
+  @Input() isButtonDisabled: boolean = false;
   @Output() favorite = new EventEmitter<User>();
-
-  constructor(private favoriteService: FavoriteService){}
 
   toggleUserInFavorite(user: User){
     this.favorite.emit(user);
   }
 
   isUserInFavorites(id: number): boolean {
-    return this.favoriteService.isEntityInFavorites(id, EntityType.User);
+    return this.favoriteIDs.includes(id);
   }
 }
