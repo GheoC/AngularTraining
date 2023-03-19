@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Car } from '../models/Car';
+import {Injectable} from '@angular/core';
+import {Car} from '../models/Car';
+import {FavoriteService} from "../../shared/services/favorite.service";
+import {EntityType} from "../../shared/enums/EntityType";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarsService {
 
-  constructor() { }
+  constructor(private favoriteService: FavoriteService) { }
 
   private cars: Car[] = [
     {
@@ -37,5 +39,11 @@ export class CarsService {
 
   getCars() {
     return this.cars;
+  }
+
+  populateFavorites(): Car[] {
+    return this.favoriteService.getFavoriteIdsByType(EntityType.Car).map((id: number) => {
+      return this.cars.find((car: Car) => car.id === id)!
+    });
   }
 }

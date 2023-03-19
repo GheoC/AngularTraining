@@ -1,14 +1,19 @@
-import { Injectable } from '@angular/core';
-import { User } from '../models/User';
-import data from './users.json'
+import {Injectable} from '@angular/core';
+import {User} from '../models/User';
+import data from '../mocks/users.json'
 import {TGender} from "../models/TGender";
+import {FavoriteService} from "../../shared/services/favorite.service";
+import {EntityType} from "../../shared/enums/EntityType";
+import {UserFormValue} from "../models/UserFormValue";
+import {map, Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
-  constructor() { }
+  constructor(private favoriteService: FavoriteService) {
+  }
 
   private users: User[] = data as User[];
 
@@ -20,18 +25,31 @@ export class UsersService {
     return this.users.length + 1;
   }
 
-  addUser(formUser: User): void {
+  addUser(formUser: UserFormValue): void {
     let newUser: User = {
-        firstName: formUser.firstName,
-        lastName: formUser.lastName,
-        email: formUser.email!,
-        age: formUser.age!,
-        company: formUser.company!,
-        department: formUser.department!,
-        gender: formUser.gender! as TGender,
-        imageUrl: formUser.imageUrl!
-      }
-    newUser.id = this.getNextId();
+      id: this.getNextId(),
+      firstName: formUser.firstName,
+      lastName: formUser.lastName,
+      email: formUser.email!,
+      age: formUser.age!,
+      company: formUser.company!,
+      department: formUser.department!,
+      gender: formUser.gender! as TGender,
+    }
     this.users.push(newUser);
+  }
+
+  populateFavorites(): User[] {
+    return this.favoriteService.getFavoriteIdsByType(EntityType.User).map((id: number) => {
+      return this.users.find((user: User) => user.id! === id)!
+    });
+  }
+
+  isEmailRegistered(email: string): Observable<boolean> {
+    return of(email).pipe(
+      map((email) => {
+        return this.users.findIndex(u => u.email === email) !== -1
+      })
+    );
   }
 }

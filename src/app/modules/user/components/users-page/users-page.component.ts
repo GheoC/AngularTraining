@@ -6,10 +6,10 @@ import {EntityType} from "../../../shared/enums/EntityType";
 
 @Component({
   selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  templateUrl: './users-page.component.html',
+  styleUrls: ['./users-page.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersPageComponent implements OnInit {
 
   users: User[] = [];
   favorites: User[] = [];
@@ -20,19 +20,11 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.users = this.userService.getUsers();
     this.favoriteIds = this.favoriteService.getFavoriteIdsByType(EntityType.User);
-    this.favorites = this.populateFavorites();
+    this.favorites = this.userService.populateFavorites();
   }
 
   toggleUserInFavorites(user: User) {
-    if (user.id != null) {
-      this.favoriteService.toggleFavoriteId(EntityType.User, user.id);
-    }
-    this.favorites = this.populateFavorites();
-  }
-
-  populateFavorites(): User[] {
-    return this.favoriteIds.map((id: number) => {
-      return this.users.find((user: User) => user.id! === id)!
-    });
+    this.favoriteService.toggleFavoriteId(EntityType.User, user.id!);
+    this.favorites = this.userService.populateFavorites();
   }
 }
