@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CarsComponent } from './modules/car/components/cars/cars.component';
-import { UsersComponent } from './modules/user/components/users/users.component';
-import {AddUserComponent} from "./modules/user/components/add-user/add-user.component";
+import { UsersPageComponent } from './modules/user/components/users-page/users-page.component';
+import {AddUserPageComponent} from "./modules/user/components/add-user-page/add-user-page.component";
 
 const routes: Routes = [
-  {path: 'users', component: UsersComponent },
-  {path: 'users/new-user', component: AddUserComponent},
+  {path: 'users', component: UsersPageComponent },
+  {path: 'users/new-user', component: AddUserPageComponent},
   {path: 'cars', component: CarsComponent},
 ];
 

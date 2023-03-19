@@ -21,19 +21,11 @@ export class CarsComponent implements OnInit {
     this.cars = this.carsService.getCars();
     console.log(this.cars);
     this.favoriteIds = this.favoriteService.getFavoriteIdsByType(EntityType.Car);
-    this.favorites = this.populateFavorites();
+    this.favorites = this.carsService.populateFavorites();
   }
 
   toggleCarInFavorites(car: Car): void {
-    if (car.id != null) {
-      this.favoriteService.toggleFavoriteId(EntityType.Car, car.id);
-    }
-    this.favorites = this.populateFavorites();
-  }
-
-  populateFavorites(): Car[] {
-    return this.favoriteIds.map((id: number) => {
-      return this.cars.find((car: Car) => car.id === id)!
-    });
+    this.favoriteService.toggleFavoriteId(EntityType.Car, car.id);
+    this.favorites = this.carsService.populateFavorites();
   }
 }

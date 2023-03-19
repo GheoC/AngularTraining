@@ -69,7 +69,7 @@
       "id": 7,
       "firstName": "Joe",
       "lastName":"Smith",
-      "email": "jow@gmail.com",
+      "email": "joe@gmail.com",
       "age": 31,
       "gender": "male",
       "department": "IT",

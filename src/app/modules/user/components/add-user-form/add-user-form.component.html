@@ -1,65 +1,78 @@
 <div class="container">
-  <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <form class="form" [formGroup]="registerForm">
+    <mat-form-field class="mat-field">
+      <mat-label>First Name</mat-label>
+      <input type="text" matInput
+             formControlName="firstName">
+      <mat-error *ngIf="registerForm.get('firstName')!.hasError('required')">
+        First name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
 
-    <div class="field">
-      <label class="label">First Name</label>
-      <input type="text"
-             class="input"
-             formControlName="firstName"
-             [class.invalid]="isFieldInvalid('firstName')"
-      />
-      <span *ngIf="isFieldInvalid('firstName')" class="error" style="font-size: 12px">First name must be at least 3 characters long!</span>
-    </div>
+    <mat-form-field class="mat-field">
+      <mat-label>Last Name</mat-label>
+      <input type="text" matInput
+             formControlName="lastName">
+      <mat-error *ngIf="registerForm.get('lastName')!.hasError('required')">
+        Last Name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
 
-    <div class="field">
-      <label class="label">Last Name</label>
-      <input type="text"
-             class="input"
-             formControlName="lastName"
-             [class.invalid]="isFieldInvalid('lastName')"
-      />
-      <span *ngIf="isFieldInvalid('lastName')" class="error" style="font-size: 12px">Last name must be at least 3 characters long!</span>
-    </div>
-
-    <div class="field">
-      <label class="label">Email</label>
-      <input type="email"
-             class="input"
+    <mat-form-field class="mat-field">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput
              formControlName="email"
-             [class.invalid]="isFieldInvalid('email')"
-      />
-      <span *ngIf="isFieldInvalid('email')" class="error" style="font-size: 12px">This must be a valid email</span>
-    </div>
+             placeholder="Ex. pat@example.com">
+      <mat-error
+        *ngIf="registerForm.get('email')!.hasError('email') && !registerForm.get('email')!.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="registerForm.get('email')!.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="registerForm.get('email')!.hasError('incorrectDomain')">
+        Email must be <strong>@gmail.com</strong> email!
+      </mat-error>
+      <mat-error *ngIf="registerForm.get('email')!.hasError('emailExists')">
+        Email is already registered!
+      </mat-error>
+    </mat-form-field>
 
-    <div class="field">
-      <label class="label">Age</label>
-      <input type="number"
-             class="input"
-             formControlName="age"
-             [class.invalid]="isFieldInvalid('age')"
-      />
-      <span *ngIf="isFieldInvalid('age')" class="error" style="font-size: 12px">Age must be at least 18 years old to register</span>
-    </div>
+    <mat-form-field class="mat-field">
+      <mat-label>Age</mat-label>
+      <input type="text" matInput
+             formControlName="age">
+      <mat-error *ngIf="registerForm.get('age')!.hasError('required')">
+        Age is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="registerForm.get('age')!.hasError('min') || registerForm.get('age')!.hasError('max')">
+        Age must be between 15 and 100 years old to register
+      </mat-error>
+    </mat-form-field>
 
-    <div class="field">
-      <label class="label">Company</label>
-      <input type="text"
-             class="input"
-             formControlName="company"
-             [class.invalid]="isFieldInvalid('company')"
-      />
-      <span *ngIf="isFieldInvalid('company')" class="error" style="font-size: 12px">Company name must be at least 3 characters long!</span>
-    </div>
+    <mat-form-field class="mat-field">
+      <mat-label>Company</mat-label>
+      <input type="text" matInput
+             formControlName="company">
+      <mat-error *ngIf="registerForm.get('company')!.hasError('required')">
+        Company is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="registerForm.get('company')!.hasError('maxlength')">
+        Company name must a maximum of 35 characters
+      </mat-error>
+    </mat-form-field>
 
-    <div class="field">
-      <label class="label">Department</label>
-      <input type="text"
-             class="input"
-             formControlName="department"
-             [class.invalid]="isFieldInvalid('department')"
-      />
-      <span *ngIf="isFieldInvalid('company')" class="error" style="font-size: 12px">Department name must be at least 2 characters long!</span>
-    </div>
+    <mat-form-field class="mat-field">
+      <mat-label>Department</mat-label>
+      <input type="text" matInput
+             formControlName="department">
+      <mat-error *ngIf="registerForm.get('department')!.hasError('required')">
+        Department is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="registerForm.get('department')!.hasError('minlength')">
+        Department name must a minimum of 6 characters
+      </mat-error>
+    </mat-form-field>
 
     <div class="field">
       <label class="label">Gender</label>
@@ -71,9 +84,6 @@
         <input type="radio" id="female" name="gender" value="female" formControlName="gender">
         <label for="female">Female</label>
       </div>
-    </div>
-    <div>
-      <button type="submit" mat-raised-button class="button">Register</button>
     </div>
   </form>
 </div>

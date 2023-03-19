@@ -9,5 +9,5 @@ export interface User {
     gender: TGender;
     department: string;
     company: string;
-    imageUrl: string;
+    imageUrl?: string;
 }
