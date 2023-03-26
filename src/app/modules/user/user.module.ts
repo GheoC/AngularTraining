@@ -13,6 +13,7 @@ import { AddUserFormComponent } from './components/add-user-form/add-user-form.c
 import { UserCardComponent } from './components/user-card/user-card.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { AddAddressFormComponent } from './components/add-address-form/add-address-form.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     AddUserPageComponent,
     AddUserFormComponent,
     UserCardComponent,
+    AddAddressFormComponent,
   ],
   imports: [
     CommonModule,
