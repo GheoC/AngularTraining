@@ -8,7 +8,12 @@
       "gender": "male",
       "department": "Accounting",
       "company": "Google",
-      "imageUrl": "https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375_960_720.png"
+      "imageUrl": "https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375_960_720.png",
+      "addresses": [{
+        "address": "address1",
+        "city": "city1",
+        "zip": "12345"
+      }]
     },
     {
       "id": 2,
@@ -19,7 +24,12 @@
       "gender": "male",
       "department": "IT",
       "company": "Microsoft",
-      "imageUrl": "https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png"
+      "imageUrl": "https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png",
+      "addresses": [{
+        "address": "address1",
+        "city": "city1",
+        "zip": "12345"
+      }]
     },
     {
       "id": 3,
@@ -30,7 +40,12 @@
       "gender": "female",
       "department": "Human Resources",
       "company": "IBM",
-      "imageUrl": "https://cdn.pixabay.com/photo/2023/01/16/09/04/woman-7721933_960_720.png"
+      "imageUrl": "https://cdn.pixabay.com/photo/2023/01/16/09/04/woman-7721933_960_720.png",
+      "addresses": [{
+        "address": "address1",
+        "city": "city1",
+        "zip": "12345"
+      }]
     },
     {
       "id": 4,
@@ -41,7 +56,12 @@
       "gender": "male",
       "department": "Accounting",
       "company": "IBM",
-      "imageUrl": "https://cdn.pixabay.com/photo/2016/12/07/21/01/cartoon-1890438_960_720.jpg"
+      "imageUrl": "https://cdn.pixabay.com/photo/2016/12/07/21/01/cartoon-1890438_960_720.jpg",
+      "addresses": [{
+        "address": "address1",
+        "city": "city1",
+        "zip": "12345"
+      }]
     },
     {
       "id": 5,
@@ -52,7 +72,12 @@
       "gender": "male",
       "department": "IT",
       "company": "Google",
-      "imageUrl": "https://cdn.pixabay.com/photo/2018/05/19/22/03/man-3414477_960_720.png"
+      "imageUrl": "https://cdn.pixabay.com/photo/2018/05/19/22/03/man-3414477_960_720.png",
+      "addresses": [{
+        "address": "address1",
+        "city": "city1",
+        "zip": "12345"
+      }]
     },
     {
       "id": 6,
@@ -63,7 +88,12 @@
       "gender": "female",
       "department": "Public Relations",
       "company": "Facebook",
-      "imageUrl": "https://cdn.pixabay.com/photo/2013/07/13/12/06/woman-159169_960_720.png"
+      "imageUrl": "https://cdn.pixabay.com/photo/2013/07/13/12/06/woman-159169_960_720.png",
+      "addresses": [{
+        "address": "address1",
+        "city": "city1",
+        "zip": "12345"
+      }]
     },
     {
       "id": 7,
@@ -74,7 +104,12 @@
       "gender": "male",
       "department": "IT",
       "company": "Facebook",
-      "imageUrl": "https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png"
+      "imageUrl": "https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png",
+      "addresses": [{
+        "address": "address1",
+        "city": "city1",
+        "zip": "12345"
+      }]
     },
     {
       "id": 8,
@@ -85,7 +120,12 @@
       "gender": "male",
       "department": "IT",
       "company": "Facebook",
-      "imageUrl": "https://cdn.pixabay.com/photo/2022/01/20/08/16/man-6951711_960_720.png"
+      "imageUrl": "https://cdn.pixabay.com/photo/2022/01/20/08/16/man-6951711_960_720.png",
+      "addresses": [{
+        "address": "address1",
+        "city": "city1",
+        "zip": "12345"
+      }]
     },
     {
       "id": 9,
@@ -96,6 +136,11 @@
       "gender": "female",
       "department": "Human Resources",
       "company": "Microsoft",
-      "imageUrl": "https://cdn.pixabay.com/photo/2022/05/23/07/03/woman-7215421_960_720.jpg"
+      "imageUrl": "https://cdn.pixabay.com/photo/2022/05/23/07/03/woman-7215421_960_720.jpg",
+      "addresses": [{
+        "address": "address1",
+        "city": "city1",
+        "zip": "12345"
+      }]
     }
   ]

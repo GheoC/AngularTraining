@@ -1,4 +1,5 @@
 import { TGender } from "./TGender";
+import {Address} from "./Address";
 
 export interface User {
     id?: number;
@@ -10,4 +11,5 @@ export interface User {
     department: string;
     company: string;
     imageUrl?: string;
+    addresses: Address[];
 }

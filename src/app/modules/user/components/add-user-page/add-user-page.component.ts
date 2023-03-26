@@ -3,6 +3,7 @@ import {UsersService} from "../../services/users.service";
 import {Router} from "@angular/router";
 import {FormGroup} from "@angular/forms";
 import {UserFormValue} from "../../models/UserFormValue";
+import {AddressesFormValue} from "../../models/AddressesFormValue";
 
 @Component({
   selector: 'app-add-user',
@@ -15,11 +16,13 @@ export class AddUserPageComponent {
 
   form = new FormGroup({});
 
-  onSubmit(): void {
+  onClick(): void {
     this.form.markAllAsTouched();
-    if (this.form.get('userForm')!.valid) {
+    console.log(this.form);
+    if (this.form.valid) {
       const userValue = this.form.get('userForm')!.value as UserFormValue;
-      this.userService.addUser(userValue);
+      const addressesValue =this.form.get('addressesForm')!.value as AddressesFormValue;
+      this.userService.addUser(userValue, addressesValue);
       this.router.navigate(['/users']);
     }
   }

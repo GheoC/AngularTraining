@@ -6,6 +6,7 @@ import {FavoriteService} from "../../shared/services/favorite.service";
 import {EntityType} from "../../shared/enums/EntityType";
 import {UserFormValue} from "../models/UserFormValue";
 import {Observable, of} from "rxjs";
+import {AddressesFormValue} from "../models/AddressesFormValue";
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class UsersService {
     return this.users.length + 1;
   }
 
-  addUser(formUser: UserFormValue): void {
+  addUser(formUser: UserFormValue, addressesForm: AddressesFormValue): void {
     let newUser: User = {
       id: this.getNextId(),
       firstName: formUser.firstName,
@@ -35,6 +36,7 @@ export class UsersService {
       company: formUser.company,
       department: formUser.department,
       gender: formUser.gender as TGender,
+      addresses: addressesForm.addresses
     }
     this.users.push(newUser);
   }

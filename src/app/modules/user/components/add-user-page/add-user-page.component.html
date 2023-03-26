@@ -1,4 +1,9 @@
-<form [formGroup]="form" class="form" (ngSubmit)="onSubmit()">
-  <app-add-user-form [parentForm] = "form"></app-add-user-form>
-  <button type="submit" mat-raised-button class="register-button">Register</button>
-</form>
+<div class="wrapper">
+  <form [formGroup]="form" class="form" (ngSubmit)="onClick()">
+
+    <app-add-user-form [parentForm]="form"></app-add-user-form>
+    <app-add-address-form [parentForm]="form"></app-add-address-form>
+
+    <button type="submit" mat-raised-button class="register-button">Register</button>
+  </form>
+</div>

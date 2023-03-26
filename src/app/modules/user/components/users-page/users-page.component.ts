@@ -19,6 +19,7 @@ export class UsersPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.users = this.userService.getUsers();
+    console.log(this.users);
     this.favoriteIds = this.favoriteService.getFavoriteIdsByType(EntityType.User);
     this.favorites = this.userService.populateFavorites();
   }
