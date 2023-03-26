@@ -13,11 +13,12 @@ export class AddUserPageComponent {
   constructor(private userService: UsersService, private router: Router) {
   };
 
-  parentForm = new FormGroup({});
+  form = new FormGroup({});
 
   onSubmit(): void {
-    const userValue = this.parentForm.get('userForm')!.value as UserFormValue;
-    if (this.parentForm.get('userForm')!.valid) {
+    this.form.markAllAsTouched();
+    if (this.form.get('userForm')!.valid) {
+      const userValue = this.form.get('userForm')!.value as UserFormValue;
       this.userService.addUser(userValue);
       this.router.navigate(['/users']);
     }

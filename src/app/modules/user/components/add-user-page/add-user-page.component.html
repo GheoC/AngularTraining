@@ -1,4 +1,4 @@
-<form [formGroup]="parentForm" class="form" (ngSubmit)="onSubmit()">
-  <app-add-user-form [parentForm] = "parentForm"></app-add-user-form>
+<form [formGroup]="form" class="form" (ngSubmit)="onSubmit()">
+  <app-add-user-form [parentForm] = "form"></app-add-user-form>
   <button type="submit" mat-raised-button class="register-button">Register</button>
 </form>

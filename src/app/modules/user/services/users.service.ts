@@ -5,7 +5,7 @@ import {TGender} from "../models/TGender";
 import {FavoriteService} from "../../shared/services/favorite.service";
 import {EntityType} from "../../shared/enums/EntityType";
 import {UserFormValue} from "../models/UserFormValue";
-import {map, Observable, of} from "rxjs";
+import {Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -30,11 +30,11 @@ export class UsersService {
       id: this.getNextId(),
       firstName: formUser.firstName,
       lastName: formUser.lastName,
-      email: formUser.email!,
-      age: formUser.age!,
-      company: formUser.company!,
-      department: formUser.department!,
-      gender: formUser.gender! as TGender,
+      email: formUser.email,
+      age: formUser.age,
+      company: formUser.company,
+      department: formUser.department,
+      gender: formUser.gender as TGender,
     }
     this.users.push(newUser);
   }
@@ -46,10 +46,7 @@ export class UsersService {
   }
 
   isEmailRegistered(email: string): Observable<boolean> {
-    return of(email).pipe(
-      map((email) => {
-        return this.users.findIndex(u => u.email === email) !== -1
-      })
-    );
+    const isExists = this.users.findIndex(u=> u.email === email) !== -1;
+    return of(isExists).pipe();
   }
 }
