@@ -1,16 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {
-  AbstractControl,
-  AsyncValidatorFn,
   FormBuilder,
-  FormControl,
   FormGroup,
-  ValidationErrors,
   Validators
 } from "@angular/forms";
 import {TGender} from "../../models/TGender";
-import {UsersService} from "../../services/users.service";
-import {map, Observable} from "rxjs";
+import {ValidatorService} from "../../../shared/services/validator.service";
+
+const GMAIL_VALIDATION_DOMAIN = '@gmail.com'
 
 @Component({
   selector: 'app-add-user-form',
@@ -21,38 +18,22 @@ export class AddUserFormComponent implements OnInit {
   @Input() parentForm!: FormGroup;
 
   registerForm: FormGroup = this.formBuilder.group({
-    firstName: ['', {validators: [Validators.required, Validators.minLength(3)], updateOn: 'submit'}],
-    lastName: ['', {validators: [Validators.required, Validators.minLength(3)], updateOn: 'submit'}],
+    firstName: ['', {validators: [Validators.required, Validators.minLength(3)]}],
+    lastName: ['', {validators: [Validators.required, Validators.minLength(3)]}],
     email: ['', {
-      validators: [Validators.required, Validators.email, this.emailContainsGmailDomain],
-      asyncValidators: [this.uniqueEmail()],
-      updateOn: 'submit'
+      validators: [Validators.required, Validators.email, this.validatorsService.emailContainsDomain(GMAIL_VALIDATION_DOMAIN)],
+      asyncValidators: [this.validatorsService.uniqueEmail()]
     }],
-    age: [null, {validators: [Validators.required, Validators.min(15), Validators.max(100)], updateOn: 'submit'}],
-    company: ['', {validators: [Validators.required, Validators.maxLength(35)], updateOn: 'submit'}],
-    department: ['', {validators: [Validators.required, Validators.minLength(6)], updateOn: 'submit'}],
-    gender: ['male' as TGender, {validators: [Validators.required], updateOn: 'submit'}],
+    age: [null, {validators: [Validators.required, Validators.min(15), Validators.max(100)]}],
+    company: ['', {validators: [Validators.required, Validators.maxLength(35)]}],
+    department: ['', {validators: [Validators.required, Validators.minLength(6)]}],
+    gender: ['male' as TGender, {validators: [Validators.required]}],
   });
-  isSubmitted: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private userService: UsersService) {
+  constructor(private formBuilder: FormBuilder, private validatorsService: ValidatorService) {
   }
 
   ngOnInit(): void {
     this.parentForm.addControl('userForm', this.registerForm);
-  }
-
-  emailContainsGmailDomain(control: FormControl): ValidationErrors | null {
-    if (control.value !== null && !control.value.includes('@gmail.com')) {
-      return {incorrectDomain: true};
-    }
-    return null;
-  }
-
-  uniqueEmail(): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      return this.userService.isEmailRegistered(control.value).pipe(
-        map((exists: boolean) => (exists ? {emailExists: true} : null)))
-    }
   }
 }

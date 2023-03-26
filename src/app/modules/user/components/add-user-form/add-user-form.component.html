@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="form" [formGroup]="registerForm">
+  <div class="form" [formGroup]="registerForm">
     <mat-form-field class="mat-field">
       <mat-label>First Name</mat-label>
       <input type="text" matInput
@@ -24,7 +24,7 @@
              formControlName="email"
              placeholder="Ex. pat@example.com">
       <mat-error
-        *ngIf="registerForm.get('email')!.hasError('email') && !registerForm.get('email')!.hasError('required')">
+        *ngIf="registerForm.get('email')!.hasError('email')">
         Please enter a valid email address
       </mat-error>
       <mat-error *ngIf="registerForm.get('email')!.hasError('required')">
@@ -70,7 +70,7 @@
         Department is <strong>required</strong>
       </mat-error>
       <mat-error *ngIf="registerForm.get('department')!.hasError('minlength')">
-        Department name must a minimum of 6 characters
+        Department name must a minimum of {{ registerForm.get('department')!.getError('minlength').requiredLength }} characters
       </mat-error>
     </mat-form-field>
 
@@ -85,5 +85,5 @@
         <label for="female">Female</label>
       </div>
     </div>
-  </form>
+  </div>
 </div>
