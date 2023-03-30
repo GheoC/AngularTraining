@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {
   AbstractControl,
   FormArray,
@@ -15,20 +15,20 @@ import {
   styleUrls: ['./add-address-form.component.scss']
 })
 export class AddAddressFormComponent implements OnInit {
-  @Input() parentForm!: FormGroup;
+  @Output() formReady = new EventEmitter<FormGroup>();
 
   registerAddresses: FormGroup = this.formBuilder.group({
     addresses: this.formBuilder.array(
       [this.createAddressGroup()],
-      {validators: [this.minLengthArray(1)]})
+      // {validators: [this.minLengthArray(1)]}
+    )
   });
 
   constructor(private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.parentForm.addControl('addressesForm', this.registerAddresses);
-    console.log(this.parentForm);
+    this.formReady.emit(this.registerAddresses);
   }
 
   createAddressGroup(): FormGroup {
@@ -37,13 +37,18 @@ export class AddAddressFormComponent implements OnInit {
         address: ['', Validators.required],
         city: [''],
         zip: [{value: '', disabled: true}]
-      }, {validators: [this.addressValidator]});
+      },
+      // {validators: [this.addressValidator]}
+    );
 
     newAddressGroup.get('city')?.valueChanges.subscribe((value) => {
+      const zip = newAddressGroup.get('zip')!;
       if (value === '') {
-        newAddressGroup.get('zip')?.disable();
+        zip.disable();
+        zip.clearValidators();
       } else {
-        newAddressGroup.get('zip')?.enable();
+        zip.enable();
+        zip.addValidators(Validators.required);
       }
     })
 
@@ -59,18 +64,16 @@ export class AddAddressFormComponent implements OnInit {
     }
   }
 
-  addresses(): FormArray {
+  get addresses(): FormArray {
     return this.registerAddresses.get('addresses') as FormArray;
   }
 
   addAddress(): void {
-    this.addresses().push(this.createAddressGroup())
-    console.log(this.parentForm);
+    this.addresses.push(this.createAddressGroup())
   }
 
   removeAddress(i: number): void {
-    this.addresses().removeAt(i);
-    console.log(this.parentForm);
+    this.addresses.removeAt(i);
   }
 
   addressValidator(group: FormGroup) {

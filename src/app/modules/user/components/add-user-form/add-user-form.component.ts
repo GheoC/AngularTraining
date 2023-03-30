@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -15,7 +15,7 @@ const GMAIL_VALIDATION_DOMAIN = '@gmail.com'
   styleUrls: ['./add-user-form.component.scss']
 })
 export class AddUserFormComponent implements OnInit {
-  @Input() parentForm!: FormGroup;
+  @Output() formReady = new EventEmitter<FormGroup>();
 
   registerForm: FormGroup = this.formBuilder.group({
     firstName: ['', {validators: [Validators.required, Validators.minLength(3)]}],
@@ -34,6 +34,6 @@ export class AddUserFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.parentForm.addControl('userForm', this.registerForm);
+    this.formReady.emit(this.registerForm);
   }
 }
