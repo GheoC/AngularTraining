@@ -27,6 +27,11 @@ export class UsersService {
   }
 
   addUser(formUser: UserFormValue, addressesForm: AddressesFormValue): void {
+    let newUser = this.formDtoToEntity(formUser, addressesForm);
+    this.users.push(newUser);
+  }
+
+  private formDtoToEntity(formUser: UserFormValue, addressesForm: AddressesFormValue) {
     let newUser: User = {
       id: this.getNextId(),
       firstName: formUser.firstName,
@@ -38,7 +43,7 @@ export class UsersService {
       gender: formUser.gender as TGender,
       addresses: addressesForm.addresses
     }
-    this.users.push(newUser);
+    return newUser;
   }
 
   populateFavorites(): User[] {
@@ -50,5 +55,21 @@ export class UsersService {
   isEmailRegistered(email: string): Observable<boolean> {
     const isExists = this.users.findIndex(u=> u.email === email) !== -1;
     return of(isExists).pipe();
+  }
+
+  getUserById(id: number): User | undefined {
+    return this.users.find((u:User)=> u.id == id);
+  }
+
+  editUserById(id: number, formUser: UserFormValue, addressesForm: AddressesFormValue){
+    const existingUser = this.getUserById(id);
+    existingUser!.firstName = formUser.firstName;
+    existingUser!.lastName = formUser.lastName;
+    existingUser!.email = formUser.email;
+    existingUser!.age = formUser.age;
+    existingUser!.company = formUser.company;
+    existingUser!.department = formUser.department
+    existingUser!.gender = formUser.gender;
+    existingUser!.addresses = addressesForm.addresses;
   }
 }
