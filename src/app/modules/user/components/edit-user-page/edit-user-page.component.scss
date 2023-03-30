@@ -1,0 +1,31 @@
+.register-button {
+  margin-top: 20px;
+  background: #037ef3;
+  color: #fff;
+  font-weight: 600;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 15px 15px;
+  border: 0;
+  font-size: 18px;
+  &:hover {
+    background: #0271da;
+  }
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  background: #fff;
+  padding: 30px;
+  max-width: 1600px;
+  border-radius: 10px;
+  box-shadow: rgba(3, 3, 3, 0.1) 10px 0px 50px;
+}
+
+.wrapper{
+  display: flex;
+  justify-content: center;
+}

@@ -14,6 +14,8 @@ import { UserCardComponent } from './components/user-card/user-card.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { AddAddressFormComponent } from './components/add-address-form/add-address-form.component';
+import { EditUserPageComponent } from './components/edit-user-page/edit-user-page.component';
+import {RouterLink} from "@angular/router";
 
 
 @NgModule({
@@ -25,17 +27,19 @@ import { AddAddressFormComponent } from './components/add-address-form/add-addre
     AddUserFormComponent,
     UserCardComponent,
     AddAddressFormComponent,
+    EditUserPageComponent,
   ],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatDividerModule,
-    MatButtonModule,
-    SharedModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-  ],
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatDividerModule,
+        MatButtonModule,
+        SharedModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        RouterLink,
+    ],
   exports:[
     UsersPageComponent,
     AddUserPageComponent,

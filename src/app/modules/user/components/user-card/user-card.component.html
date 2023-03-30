@@ -13,5 +13,8 @@
       <p>{{user.company}}</p>
       <p>{{user.department}}</p>
       <p>{{user.gender}}</p>
+      <p *ngFor="let address of user.addresses">
+        {{address.address}}, {{address.zip}}, {{address.city}}
+      </p>
     </div>
 </app-card>

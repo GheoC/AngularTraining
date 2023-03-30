@@ -7,5 +7,6 @@
       (favoriteToggle)="toggleUserInFavorite(user)"
     >
     </app-user-card>
+    <button mat-raised-button [routerLink]="['/users/edit', user.id]">Edit</button>
   </ng-container>
 </div>

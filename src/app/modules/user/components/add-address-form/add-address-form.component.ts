@@ -1,13 +1,10 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {
-  AbstractControl,
   FormArray,
   FormBuilder,
   FormGroup,
-  ValidationErrors,
-  ValidatorFn,
-  Validators
 } from "@angular/forms";
+import {AddressFormService} from "../../services/address-form.service";
 
 @Component({
   selector: 'app-add-address-form',
@@ -19,57 +16,23 @@ export class AddAddressFormComponent implements OnInit {
 
   registerAddresses: FormGroup = this.formBuilder.group({
     addresses: this.formBuilder.array(
-      [this.createAddressGroup()],
-      // {validators: [this.minLengthArray(1)]}
+      [this.addressFormService.createAddressGroup()],
+      // {validators: [this.minLengthArray(1)]}ng g
     )
   });
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private addressFormService: AddressFormService) {
   }
 
   ngOnInit(): void {
     this.formReady.emit(this.registerAddresses);
   }
-
-  createAddressGroup(): FormGroup {
-    let newAddressGroup = this.formBuilder.group(
-      {
-        address: ['', Validators.required],
-        city: [''],
-        zip: [{value: '', disabled: true}]
-      },
-      // {validators: [this.addressValidator]}
-    );
-
-    newAddressGroup.get('city')?.valueChanges.subscribe((value) => {
-      const zip = newAddressGroup.get('zip')!;
-      if (value === '') {
-        zip.disable();
-        zip.clearValidators();
-      } else {
-        zip.enable();
-        zip.addValidators(Validators.required);
-      }
-    })
-
-    return newAddressGroup;
-  }
-
-  minLengthArray(min: number): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (control.value.length < min) {
-        return {'minLengthArray': {valid: false, requiredLength: min, actualLength: control.value.length}}
-      }
-      return null;
-    }
-  }
-
   get addresses(): FormArray {
     return this.registerAddresses.get('addresses') as FormArray;
   }
 
   addAddress(): void {
-    this.addresses.push(this.createAddressGroup())
+    this.addresses.push(this.addressFormService.createAddressGroup())
   }
 
   removeAddress(i: number): void {
