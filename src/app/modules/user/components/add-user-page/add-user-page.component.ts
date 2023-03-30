@@ -26,4 +26,8 @@ export class AddUserPageComponent {
       this.router.navigate(['/users']);
     }
   }
+
+  registerSubForm(subForm: FormGroup, key: string): void{
+    this.form.addControl(key, subForm)
+  }
 }

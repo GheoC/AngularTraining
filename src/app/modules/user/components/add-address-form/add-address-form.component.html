@@ -1,12 +1,12 @@
 <div class="container">
   <div [formGroup]="registerAddresses" class="form">
     <div formArrayName="addresses">
-      <div *ngFor="let userAddress of addresses().controls; let i = index" class="address-wrapper">
+      <div *ngFor="let userAddress of addresses.controls; let i = index" class="address-wrapper">
         <div [formGroupName]="i">
           <mat-form-field class="mat-field">
             <mat-label>Address</mat-label>
             <input type="text" matInput formControlName="address">
-            <mat-error *ngIf="addresses().at(i).get('address')?.hasError('required')">
+            <mat-error *ngIf="addresses.at(i).get('address')?.hasError('required')">
               You must enter an address
             </mat-error>
           </mat-form-field>
@@ -14,22 +14,21 @@
           <mat-form-field class="mat-field">
             <mat-label>City</mat-label>
             <input type="text" matInput formControlName="city">
-            <mat-error> something about city</mat-error>
           </mat-form-field>
 
           <mat-form-field class="mat-field" >
             <mat-label>Zip</mat-label>
             <input type="text" matInput formControlName="zip">
+            <mat-error *ngIf="addresses.at(i).get('zip')?.hasError('required')">
+              Zip is required if city is specified
+            </mat-error>
           </mat-form-field>
-          <mat-error *ngIf="addresses().at(i).hasError('invalidZip')">
-            Zip is required if city is specified
-          </mat-error>
-          <button type="button" mat-raised-button (click)="removeAddress(i)">Remove address</button>
+          <button *ngIf="addresses.length > 1" type="button" mat-raised-button (click)="removeAddress(i)">Remove address</button>
         </div>
       </div>
     </div>
-    <mat-error *ngIf="addresses().hasError('minLengthArray')">
-      User must have at least {{ addresses().getError('minLengthArray').requiredLength}} address
+    <mat-error *ngIf="addresses.hasError('minLengthArray')">
+      User must have at least {{ addresses.getError('minLengthArray').requiredLength}} address
     </mat-error>
     <button type="button" mat-raised-button (click)="addAddress()"> Add Address</button>
   </div>

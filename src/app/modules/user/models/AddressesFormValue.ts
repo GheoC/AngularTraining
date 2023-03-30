@@ -1,5 +1,5 @@
-import {Address} from "./Address";
+import {AddressFormValue} from "./AddressFormValue";
 
 export interface AddressesFormValue{
-  addresses: Address[];
+  addresses: AddressFormValue[];
 }
