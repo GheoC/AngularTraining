@@ -16,6 +16,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { AddAddressFormComponent } from './components/add-address-form/add-address-form.component';
 import { EditUserPageComponent } from './components/edit-user-page/edit-user-page.component';
 import {RouterLink} from "@angular/router";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import {RouterLink} from "@angular/router";
         MatFormFieldModule,
         MatInputModule,
         RouterLink,
+        MatIconModule,
     ],
   exports:[
     UsersPageComponent,

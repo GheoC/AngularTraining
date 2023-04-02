@@ -38,18 +38,4 @@ export class AddAddressFormComponent implements OnInit {
   removeAddress(i: number): void {
     this.addresses.removeAt(i);
   }
-
-  addressValidator(group: FormGroup) {
-    const cityValue = group.get('city')?.value;
-    const zip = group.get('zip')?.value;
-    if (cityValue !== '' && zip === '') {
-      return {invalidZip: true};
-    }
-    return null;
-  }
-
-  isDisabled(group: FormGroup): boolean {
-    const cityValue = group.get('city')?.value;
-    return cityValue === '';
-  }
 }

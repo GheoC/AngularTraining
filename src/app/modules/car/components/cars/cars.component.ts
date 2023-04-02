@@ -17,7 +17,6 @@ export class CarsComponent implements OnInit {
   favoriteIds: number[] = [];
 
   ngOnInit(): void {
-    debugger;
     this.cars = this.carsService.getCars();
     console.log(this.cars);
     this.favoriteIds = this.favoriteService.getFavoriteIdsByType(EntityType.Car);

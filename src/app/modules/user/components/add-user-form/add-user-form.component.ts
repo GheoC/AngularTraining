@@ -41,11 +41,14 @@ export class AddUserFormComponent implements OnInit {
       gender: ['male' as TGender, {validators: [Validators.required]}],
     });
 
+    const firstnameObservable = userFormGroup.get('firstName')!.valueChanges.pipe(startWith(''));
+    const lastnameObservable = userFormGroup.get('lastName')!.valueChanges.pipe(startWith(''));
     combineLatest(
-      [ userFormGroup.get('firstName')!.valueChanges.pipe(startWith('')),
-               userFormGroup.get('lastName')!.valueChanges.pipe(startWith(''))])
-      .subscribe(([val1, val2]) =>
-        userFormGroup.get('email')?.setValue((val1 as string).toLowerCase()+'.'+(val2 as string).toLowerCase()+'@gmail.com'));
+      [ firstnameObservable, lastnameObservable])
+      .subscribe(([val1, val2]) =>{
+        const result = `${val1!.toLowerCase()}.${val2!.toLowerCase()}@gmail.com`
+        userFormGroup.get('email')?.setValue(result)
+      });
 
     return userFormGroup;
   }

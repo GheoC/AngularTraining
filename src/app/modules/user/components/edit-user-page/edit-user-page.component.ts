@@ -6,13 +6,14 @@ import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {AddressFormService} from "../../services/address-form.service";
 import {UserFormValue} from "../../models/UserFormValue";
 import {AddressesFormValue} from "../../models/AddressesFormValue";
+import {IDeactivateComponent} from "../../../core/guards/can-deactivate/can-deactivate.guard";
 
 @Component({
   selector: 'app-edit-user-page',
   templateUrl: './edit-user-page.component.html',
   styleUrls: ['./edit-user-page.component.scss']
 })
-export class EditUserPageComponent implements OnInit, AfterViewInit {
+export class EditUserPageComponent implements OnInit, AfterViewInit, IDeactivateComponent {
 
   id!: number;
   user?: User;
@@ -39,7 +40,7 @@ export class EditUserPageComponent implements OnInit, AfterViewInit {
     this.form.addControl(key, subForm)
   }
 
-  onClick() {
+  onSubmit() {
     this.form.markAllAsTouched();
     console.log(this.form);
     if (this.form.valid) {
@@ -78,5 +79,13 @@ export class EditUserPageComponent implements OnInit, AfterViewInit {
       (addressesArray as FormArray).push(newAddressGroup);
     }
     console.log(addressesArray);
+  }
+
+  canExit() {
+    if (this.form.pristine){
+      return true
+    } else {
+      return confirm('Do you want to leave the page')
+    }
   }
 }

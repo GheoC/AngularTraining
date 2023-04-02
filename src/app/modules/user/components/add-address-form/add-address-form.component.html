@@ -27,9 +27,6 @@
         </div>
       </div>
     </div>
-    <mat-error *ngIf="addresses.hasError('minLengthArray')">
-      User must have at least {{ addresses.getError('minLengthArray').requiredLength}} address
-    </mat-error>
     <button type="button" mat-raised-button (click)="addAddress()"> Add Address</button>
   </div>
 </div>
