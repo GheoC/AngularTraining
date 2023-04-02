@@ -1,9 +1,10 @@
-<app-card
-  [imageUrl]="user.imageUrl ? user.imageUrl : USER_DEFAULT_IMAGE"
-  [isFavorite]="isFavorite"
-  [isButtonDisabled]="isButtonDisabled"
-  (favoriteToggle)="toggleUserInFavorite(user)"
->
+<div class="wrapper">
+  <app-card
+    [imageUrl]="user.imageUrl ? user.imageUrl : USER_DEFAULT_IMAGE"
+    [isFavorite]="isFavorite"
+    [isButtonDisabled]="isButtonDisabled"
+    (favoriteToggle)="toggleUserInFavorite(user)"
+  >
     <div title>
       <p [ngClass]="'user-title'">Username {{user.firstName}} {{user.lastName}}</p>
       <p>Age {{user.age}}</p>
@@ -17,4 +18,8 @@
         {{address.address}}, {{address.zip}}, {{address.city}}
       </p>
     </div>
-</app-card>
+  </app-card>
+  <button mat-fab color="primary" [routerLink]="['/users/edit', user.id]">
+    <mat-icon>edit</mat-icon>
+  </button>
+</div>

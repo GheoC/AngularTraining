@@ -1,8 +1,5 @@
-<p>edit-user-page works!  {{id}}</p>
-<p>{{user?.firstName}}</p>
-
 <div class="wrapper">
-  <form [formGroup]="form" class="form" (ngSubmit)="onClick()">
+  <form [formGroup]="form" class="form" (ngSubmit)="onSubmit()">
 
     <app-add-user-form (formReady)="registerSubForm($event, 'userForm')"></app-add-user-form>
     <app-add-address-form (formReady)="registerSubForm($event, 'addressesForm')"></app-add-address-form>
