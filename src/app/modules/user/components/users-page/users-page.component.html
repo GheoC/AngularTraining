@@ -1,3 +1,7 @@
+<div class="search-bar">
+  <app-user-search-form (formReady)="registerSubForm($event, 'searchForm')"></app-user-search-form>
+</div>
+
 <div class="container">
   <app-users-list-view
     [users]="users"

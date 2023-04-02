@@ -5,8 +5,9 @@ import {TGender} from "../models/TGender";
 import {FavoriteService} from "../../shared/services/favorite.service";
 import {EntityType} from "../../shared/enums/EntityType";
 import {UserFormValue} from "../models/UserFormValue";
-import {Observable, of} from "rxjs";
+import {delay, Observable, of} from "rxjs";
 import {AddressesFormValue} from "../models/AddressesFormValue";
+import {UserSearchParams} from "../models/UserSearchParams";
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,27 @@ export class UsersService {
 
   private users: User[] = data as User[];
 
-  getUsers(): User[] {
-    return this.users;
+  getUsers(): Observable<User[]> {
+    return of(this.users).pipe(delay(1000));
+  }
+
+  getSearchedUsers(searchParams: UserSearchParams): User[] {
+    let searchedUsers: User[] = [...this.users];
+
+    if (searchParams.firstName !== '') {
+      searchedUsers = searchedUsers
+        .filter((u: User) => {
+          return u.firstName.toLowerCase().includes(searchParams.firstName.toLowerCase())
+        });
+    }
+
+    if (searchParams.lastName !== '') {
+      searchedUsers = searchedUsers
+        .filter((u: User) => {
+          return u.lastName.toLowerCase().includes(searchParams.lastName.toLowerCase())
+        });
+    }
+    return searchedUsers;
   }
 
   getNextId(): number {
@@ -27,11 +47,11 @@ export class UsersService {
   }
 
   addUser(formUser: UserFormValue, addressesForm: AddressesFormValue): void {
-    let newUser = this.formDtoToEntity(formUser, addressesForm);
-    this.users.push(newUser);
+    this.formDtoToEntity(formUser, addressesForm).subscribe(value => this.users.push(value));
+
   }
 
-  private formDtoToEntity(formUser: UserFormValue, addressesForm: AddressesFormValue) {
+  private formDtoToEntity(formUser: UserFormValue, addressesForm: AddressesFormValue): Observable<User> {
     let newUser: User = {
       id: this.getNextId(),
       firstName: formUser.firstName,
@@ -43,7 +63,7 @@ export class UsersService {
       gender: formUser.gender as TGender,
       addresses: addressesForm.addresses
     }
-    return newUser;
+    return of(newUser).pipe(delay(1000));
   }
 
   populateFavorites(): User[] {
@@ -53,23 +73,27 @@ export class UsersService {
   }
 
   isEmailRegistered(email: string): Observable<boolean> {
-    const isExists = this.users.findIndex(u=> u.email === email) !== -1;
+    const isExists = this.users.findIndex(u => u.email === email) !== -1;
     return of(isExists).pipe();
   }
 
-  getUserById(id: number): User | undefined {
-    return this.users.find((u:User)=> u.id == id);
+  getUserById(id: number): Observable<User | undefined> {
+    const userFound = this.users.find((u: User) => u.id == id);
+    return of(userFound).pipe(delay(1000));
   }
 
-  editUserById(id: number, formUser: UserFormValue, addressesForm: AddressesFormValue){
-    const existingUser = this.getUserById(id);
-    existingUser!.firstName = formUser.firstName;
-    existingUser!.lastName = formUser.lastName;
-    existingUser!.email = formUser.email;
-    existingUser!.age = formUser.age;
-    existingUser!.company = formUser.company;
-    existingUser!.department = formUser.department
-    existingUser!.gender = formUser.gender;
-    existingUser!.addresses = addressesForm.addresses;
+  editUserById(id: number, formUser: UserFormValue, addressesForm: AddressesFormValue) {
+    let existingUser: User;
+    this.getUserById(id).subscribe(value => {
+      existingUser = value!;
+      existingUser!.firstName = formUser.firstName;
+      existingUser!.lastName = formUser.lastName;
+      existingUser!.email = formUser.email;
+      existingUser!.age = formUser.age;
+      existingUser!.company = formUser.company;
+      existingUser!.department = formUser.department
+      existingUser!.gender = formUser.gender;
+      existingUser!.addresses = addressesForm.addresses;
+    });
   }
 }

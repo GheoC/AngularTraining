@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UsersService} from "../../services/users.service";
 import {User} from "../../models/User";
@@ -13,7 +13,7 @@ import {IDeactivateComponent} from "../../../core/guards/can-deactivate/can-deac
   templateUrl: './edit-user-page.component.html',
   styleUrls: ['./edit-user-page.component.scss']
 })
-export class EditUserPageComponent implements OnInit, AfterViewInit, IDeactivateComponent {
+export class EditUserPageComponent implements OnInit, IDeactivateComponent {
 
   id!: number;
   user?: User;
@@ -24,16 +24,16 @@ export class EditUserPageComponent implements OnInit, AfterViewInit, IDeactivate
 
   ngOnInit(): void {
     this.activatedRouter.params.subscribe(param => this.id = param['id']);
-    this.user = this.userService.getUserById(this.id);
-    if (this.user === undefined) {
-      //TODO create page not found and replace this
-      this.router.navigate(['/users']);
-    }
-  }
-
-  ngAfterViewInit(): void {
-    this.populateUserForm();
-    this.populateAddressesForm()
+    this.userService.getUserById(this.id).subscribe(value =>
+      {
+        if (value === undefined) {
+          this.router.navigate(['/users']);
+        }
+        this.user = value;
+        this.populateUserForm();
+        this.populateAddressesForm();
+      }
+    );
   }
 
   registerSubForm(subForm: FormGroup, key: string): void {
@@ -47,6 +47,7 @@ export class EditUserPageComponent implements OnInit, AfterViewInit, IDeactivate
       const userValue = this.form.get('userForm')!.value as UserFormValue;
       const addressesValue =this.form.get('addressesForm')!.value as AddressesFormValue;
       this.userService.editUserById(this.id, userValue, addressesValue);
+      this.form.markAsPristine();
       this.router.navigate(['/users']);
     }
   }

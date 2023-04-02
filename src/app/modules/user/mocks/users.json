@@ -2,7 +2,7 @@
     {
       "id": 1,
       "firstName": "John",
-      "lastName": "Smith",
+      "lastName": "Doe",
       "email": "john@gmail.com",
       "age": 17,
       "gender": "male",
@@ -97,8 +97,8 @@
     },
     {
       "id": 7,
-      "firstName": "Joe",
-      "lastName":"Smith",
+      "firstName": "George",
+      "lastName":"Jetson",
       "email": "joe@gmail.com",
       "age": 31,
       "gender": "male",
@@ -113,8 +113,8 @@
     },
     {
       "id": 8,
-      "firstName": "Jim",
-      "lastName": "Smith",
+      "firstName": "Fred",
+      "lastName": "Flintstone",
       "email": "jim@gmail.com",
       "age": 37,
       "gender": "male",
@@ -130,7 +130,7 @@
     {
       "id": 9,
       "firstName": "Jane",
-      "lastName": "Smith",
+      "lastName": "Flintstone",
       "email": "jane@gmail.com",
       "age": 41,
       "gender": "female",

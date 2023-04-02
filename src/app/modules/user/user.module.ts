@@ -17,6 +17,7 @@ import { AddAddressFormComponent } from './components/add-address-form/add-addre
 import { EditUserPageComponent } from './components/edit-user-page/edit-user-page.component';
 import {RouterLink} from "@angular/router";
 import {MatIconModule} from "@angular/material/icon";
+import {UserSearchFormComponent} from "./components/user-search-form/user-search-form.component";
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {MatIconModule} from "@angular/material/icon";
     UserCardComponent,
     AddAddressFormComponent,
     EditUserPageComponent,
+    UserSearchFormComponent,
   ],
     imports: [
         CommonModule,
