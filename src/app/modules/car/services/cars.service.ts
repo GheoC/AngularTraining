@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Car} from '../models/Car';
 import {FavoriteService} from "../../shared/services/favorite.service";
 import {EntityType} from "../../shared/enums/EntityType";
+import {delay, Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +38,8 @@ export class CarsService {
     }
   ]
 
-  getCars() {
-    return this.cars;
+  getCars(): Observable<Car[]> {
+    return of(this.cars).pipe(delay(1000));
   }
 
   populateFavorites(): Car[] {

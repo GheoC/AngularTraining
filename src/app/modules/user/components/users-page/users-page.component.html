@@ -1,8 +1,12 @@
 <div class="search-bar">
-  <app-user-search-form (formReady)="registerSubForm($event, 'searchForm')"></app-user-search-form>
+  <app-user-search-form (searchParamsEmitter)="criteriaChanged($event)"></app-user-search-form>
 </div>
 
 <div class="container">
+  <div *ngIf="isLoading" class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
   <app-users-list-view
     [users]="users"
     [favoriteIDs]="favoriteIds"

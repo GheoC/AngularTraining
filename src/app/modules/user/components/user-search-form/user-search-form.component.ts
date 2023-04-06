@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {debounceTime, distinctUntilChanged} from "rxjs";
 
 @Component({
   selector: 'app-user-search-form',
@@ -7,20 +8,22 @@ import {FormBuilder, FormGroup} from "@angular/forms";
   styleUrls: ['./user-search-form.component.scss']
 })
 export class UserSearchFormComponent {
-  @Output() formReady = new EventEmitter<FormGroup>();
-  userSearchForm: FormGroup = this.createUserSearchForm();
+
+  @Output() searchParamsEmitter = new EventEmitter<string>();
+
+  userSearchForm: FormGroup = this.formBuilder.group({
+    name: [''],
+  });
 
   constructor(private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.formReady.emit(this.userSearchForm);
-  }
-
-  createUserSearchForm(): FormGroup {
-    return this.formBuilder.group({
-      firstName: [''],
-      lastName: [''],
-    });
+    this.userSearchForm.get('name')!.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged()
+      )
+      .subscribe((value: string) => this.searchParamsEmitter.emit(value));
   }
 }

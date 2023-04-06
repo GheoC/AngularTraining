@@ -18,6 +18,7 @@ import { EditUserPageComponent } from './components/edit-user-page/edit-user-pag
 import {RouterLink} from "@angular/router";
 import {MatIconModule} from "@angular/material/icon";
 import {UserSearchFormComponent} from "./components/user-search-form/user-search-form.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import {UserSearchFormComponent} from "./components/user-search-form/user-search
         MatInputModule,
         RouterLink,
         MatIconModule,
+        MatProgressSpinnerModule,
     ],
   exports:[
     UsersPageComponent,

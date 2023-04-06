@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UsersService} from "../../services/users.service";
 import {User} from "../../models/User";
@@ -7,33 +7,45 @@ import {AddressFormService} from "../../services/address-form.service";
 import {UserFormValue} from "../../models/UserFormValue";
 import {AddressesFormValue} from "../../models/AddressesFormValue";
 import {IDeactivateComponent} from "../../../core/guards/can-deactivate/can-deactivate.guard";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-edit-user-page',
   templateUrl: './edit-user-page.component.html',
   styleUrls: ['./edit-user-page.component.scss']
 })
-export class EditUserPageComponent implements OnInit, IDeactivateComponent {
+export class EditUserPageComponent implements OnInit, OnDestroy, IDeactivateComponent {
 
   id!: number;
   user?: User;
   form = new FormGroup({});
+  isSubmitted: boolean = false;
+  isLoading: boolean = false;
+  userSubscription!: Subscription;
+  paramSubscription!: Subscription;
 
-  constructor(private activatedRouter: ActivatedRoute, private userService: UsersService, private router: Router, private fb: FormBuilder,
+  constructor(private activatedRouter: ActivatedRoute,
+              private userService: UsersService,
+              private router: Router,
+              private fb: FormBuilder,
               private addressFormService: AddressFormService) {}
 
   ngOnInit(): void {
-    this.activatedRouter.params.subscribe(param => this.id = param['id']);
-    this.userService.getUserById(this.id).subscribe(value =>
-      {
+    this.isLoading = true
+    this.paramSubscription = this.activatedRouter.params.subscribe(param => {
+      this.id = param['id'];
+
+      this.userSubscription = this.userService.getUserById(this.id).subscribe(value => {
         if (value === undefined) {
           this.router.navigate(['/users']);
         }
+
+        this.isLoading= false
         this.user = value;
         this.populateUserForm();
         this.populateAddressesForm();
-      }
-    );
+      });
+    });
   }
 
   registerSubForm(subForm: FormGroup, key: string): void {
@@ -41,14 +53,23 @@ export class EditUserPageComponent implements OnInit, IDeactivateComponent {
   }
 
   onSubmit() {
+    console.log("clicked")
     this.form.markAllAsTouched();
-    console.log(this.form);
-    if (this.form.valid) {
+    if (this.form.valid && !this.isLoading) {
+      console.log("sending data...")
+      this.isSubmitted = true;
       const userValue = this.form.get('userForm')!.value as UserFormValue;
-      const addressesValue =this.form.get('addressesForm')!.value as AddressesFormValue;
-      this.userService.editUserById(this.id, userValue, addressesValue);
-      this.form.markAsPristine();
-      this.router.navigate(['/users']);
+      const addressesValue = this.form.get('addressesForm')!.value as AddressesFormValue;
+
+      this.isLoading = true;
+      this.userService.editUserById(this.id, userValue, addressesValue).subscribe(value => {
+        this.isLoading = false;
+
+        if (value) {
+          this.form.markAsPristine();
+          this.router.navigate(['/users']);
+        }
+      });
     }
   }
 
@@ -68,7 +89,6 @@ export class EditUserPageComponent implements OnInit, IDeactivateComponent {
 
   populateAddressesForm(): void {
     const addressesArray = this.form.get('addressesForm')?.get('addresses') as unknown;
-    console.log(addressesArray);
     (addressesArray as FormArray).removeAt(0);
     for (let userAddress of this.user!.addresses) {
       let newAddressGroup: FormGroup = this.addressFormService.createAddressGroup();
@@ -79,14 +99,14 @@ export class EditUserPageComponent implements OnInit, IDeactivateComponent {
       });
       (addressesArray as FormArray).push(newAddressGroup);
     }
-    console.log(addressesArray);
   }
 
   canExit() {
-    if (this.form.pristine){
-      return true
-    } else {
-      return confirm('Do you want to leave the page')
-    }
+    return this.form.pristine;
+  }
+
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
+    this.paramSubscription.unsubscribe();
   }
 }
