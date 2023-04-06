@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CarsComponent } from './components/cars/cars.component';
 import { CarsListViewComponent } from './components/cars-list-view/cars-list-view.component';
 import { CarCardComponent } from './components/car-card/car-card.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -14,11 +15,12 @@ import { CarCardComponent } from './components/car-card/car-card.component';
     CarsListViewComponent,
     CarCardComponent,
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    SharedModule,
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        SharedModule,
+        MatProgressSpinnerModule,
+    ],
   exports:[
     FavoriteCarComponent
   ]

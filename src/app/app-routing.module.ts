@@ -7,10 +7,22 @@ import {EditUserPageComponent} from "./modules/user/components/edit-user-page/ed
 import {CanDeactivateGuard} from "./modules/core/guards/can-deactivate/can-deactivate.guard";
 
 const routes: Routes = [
-  {path: 'users', component: UsersPageComponent },
-  {path: 'users/new-user', component: AddUserPageComponent},
-  {path: 'users/edit/:id', canDeactivate: [CanDeactivateGuard], component: EditUserPageComponent},
-  {path: 'cars', component: CarsComponent},
+  {
+    path: 'users',
+    component: UsersPageComponent
+  },
+  {
+    path: 'users/new-user',
+    component: AddUserPageComponent
+  },
+  {
+    path: 'users/edit/:id',
+    canDeactivate: [CanDeactivateGuard],
+    component: EditUserPageComponent},
+  {
+    path: 'cars',
+    component: CarsComponent
+  },
 ];
 
 @NgModule({
